@@ -1,6 +1,24 @@
 Puppet::Type.newtype(:transition) do
   @doc = "Define a transitional state."
 
+  newproperty(:enable) do
+    desc "Enable or disable this conditional state transition. Valid values
+      are true or false."
+
+    # If the transition should occur and the transition resource is enabled,
+    # call the provider's transition() method.
+    newvalue(:true) do
+      @resource.transition
+    end
+
+    # If the transition is disabled (enable=false), the transition resource
+    # should always be # considered insync. Therefore a sync method for the
+    # property should never be called if enable=false.
+    newvalue(:false) do
+      raise "Improperly implemented insync?() method"
+    end
+  end
+
   newparam(:resource) do
     desc "The resource for which a transitional state is being defined. This
       should be a resource reference (e.g. Service['apache']). This resource
@@ -20,7 +38,7 @@ Puppet::Type.newtype(:transition) do
     end
   end
 
-  newproperty(:attributes) do
+  newparam(:attributes) do
     desc "The hash of attributes to set on the resource when applying a
       transitional state. Each hash key must be a valid attribute for the
       resource being transitioned."
