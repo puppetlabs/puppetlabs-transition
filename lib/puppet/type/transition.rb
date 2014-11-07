@@ -1,7 +1,7 @@
 Puppet::Type.newtype(:transition) do
   @doc = "Define a transitional state."
 
-  newproperty(:resource) do
+  newparam(:resource) do
     desc "The resource for which a transitional state is being defined. This
       should be a resource reference (e.g. Service['apache']). This resource
       will be made to autorequire the transitional state."
@@ -20,7 +20,7 @@ Puppet::Type.newtype(:transition) do
     end
   end
 
-  newparam(:attributes) do
+  newproperty(:attributes) do
     desc "The hash of attributes to set on the resource when applying a
       transitional state. Each hash key must be a valid attribute for the
       resource being transitioned."
