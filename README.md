@@ -58,7 +58,7 @@ that resource. Second, it specifies an array of other resources in the catalog,
 for which this temporary transition state should be invoked prior to changing.
 
 The type also adds a `before` edge to each resource in the `prior_to`
-parameter, and a `require` edge to the resource specified in the `resource`
+parameter, and a `before` edge to the resource specified in the `resource`
 parameter.
 
 When evaluated, the transition provider will retrieve each resource specified
