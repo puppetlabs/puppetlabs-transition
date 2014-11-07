@@ -5,8 +5,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
   def transition
   end
 
-  def insync?(is)
-    false
+  def transition?
   end
 
 end

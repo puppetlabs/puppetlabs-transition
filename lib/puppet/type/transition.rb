@@ -1,21 +1,46 @@
 Puppet::Type.newtype(:transition) do
   @doc = "Define a transitional state."
 
+  # The enable property determines whether or not this transition state may be
+  # applied. When enable=true, the property will call two methods in the
+  # provider. It will call transition?() as its insync method. Therefore
+  # transition?() should return true if the transitional state should be
+  # implemented, and false if it should not. The transition() method should
+  # implement the transitional state.
   newproperty(:enable) do
     desc "Enable or disable this conditional state transition. Valid values
       are true or false."
 
+    newvalues :true, :false
+    defaultto :true
+
     # If the transition should occur and the transition resource is enabled,
     # call the provider's transition() method.
-    newvalue(:true) do
-      @resource.transition
+    def sync
+      @resource.provider.transition
     end
 
-    # If the transition is disabled (enable=false), the transition resource
-    # should always be # considered insync. Therefore a sync method for the
-    # property should never be called if enable=false.
-    newvalue(:false) do
-      raise "Improperly implemented insync?() method"
+    # There is no getter method for this property as it is used only as a
+    # decision point whether or not to realize the transition behavior if the
+    # transition conditions exist. Therefore retrieve should just echo the
+    # property value.
+    def retrieve
+      @resource["enable"]
+    end
+
+    # Whether or not the resource is insync is determined by the transition?()
+    # method of the provider. To transition or not to transition, that is the
+    # question.
+    def insync?(is)
+      case @resource["enable"]
+      when :true
+      require 'debug'; debugger
+        # If a transition should occur, the resource is not insync.
+        !@resource.provider.transition?
+      else
+        # Return true, since a disabled transition is always insync.
+        true
+      end
     end
   end
 
@@ -59,6 +84,15 @@ Puppet::Type.newtype(:transition) do
       # TODO: validate that each element is a valid resource reference.
       true
     end
+  end
+
+  # This resource does not need or use a namevar. However, it is far simpler to
+  # define an unused name parameter and make it the namevar than it is to
+  # convince Puppet that a namevar isn't needed.
+  newparam(:name) do
+    isnamevar
+    desc "This parameter does not serve any function beyond setting the
+      resource's name."
   end
 
 end
