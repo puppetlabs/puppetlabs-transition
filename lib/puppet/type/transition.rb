@@ -34,7 +34,6 @@ Puppet::Type.newtype(:transition) do
     def insync?(is)
       case @resource["enable"]
       when :true
-      require 'debug'; debugger
         # If a transition should occur, the resource is not insync.
         !@resource.provider.transition?
       else
@@ -85,7 +84,7 @@ Puppet::Type.newtype(:transition) do
       true
     end
   end
-
+ 
   # This resource does not need or use a namevar. However, it is far simpler to
   # define an unused name parameter and make it the namevar than it is to
   # convince Puppet that a namevar isn't needed.
@@ -93,6 +92,15 @@ Puppet::Type.newtype(:transition) do
     isnamevar
     desc "This parameter does not serve any function beyond setting the
       resource's name."
+  end
+
+  # All parameters are required (except for name)
+  validate do
+    [:resource, :attributes, :prior_to].each do |param|
+      if not self.parameters[param]
+        self.fail "Required parameter missing: #{param}"
+      end
+    end
   end
 
 end
