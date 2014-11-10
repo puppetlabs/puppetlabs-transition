@@ -1,18 +1,60 @@
+require 'puppet/application/resource'
+
 Puppet::Type.type(:transition).provide(:ruby) do
   desc "Ruby provider for transition type. This provider is not platform
     specific."
 
   def transition
+    catalog_resource = resolve_resource(@resource['resource'])
+    name = catalog_resource.name
+    type = catalog_resource.type
+    resource_key = [type, name].join('/')
+
+    # Retrive original resource definition attributes from catalog
+    catalog_attributes = catalog_resource.to_hash
+
+    # Symbolize keys in attributes parameter
+    transition_attributes = @resource['attributes'].inject({}) do |new,(k,v)|
+      new[k.to_sym] = v
+      new
+    end
+
+    # Create a transitional, merged set of attributes, sans any attributes
+    # with an explicit nil value. Those attributes appear to come from the
+    # Type being copied, and we just want to build a new type from a
+    # Resource.
+    merged = catalog_attributes.merge(transition_attributes).reject do |k,v|
+      v.nil?
+    end
+
+    # Build and apply the resource ?????
+    resource = Puppet::Resource.new(type, name, :parameters => merged)
+    result = Puppet::Resource.indirection.save(resource, resource_key)
+
+    # TODO: Sanely log the result. ???
   end
 
   def transition?
+    # Retrieve each prior_to resource from the catalog.
     priors = [@resource['prior_to']].flatten.map do |item|
       resolve_resource(item)
     end
 
-    # TODO: something useful, or finish the method
+    # Determine if there are changes pending to any of the prior_to resources.
+    pending_change = priors.any? do |resource|
+      current_values = resource.retrieve_resource.to_hash
+      resource.properties.any? do |property|
+        current_value = current_values[property.name]
+        if property.should && !property.safe_insync?(current_value)
+          true
+        else
+          false
+        end
+      end
+    end
 
-    insync_states.include?(:false)
+    # If changes are pending, transtion?() will return true.
+    pending_change
   end
 
   # This method borrowed from the richardc/datacat module
