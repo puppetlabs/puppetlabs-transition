@@ -28,6 +28,24 @@ Puppet::Type.newtype(:transition) do
       @resource["enable"]
     end
 
+    # When displaying that a change is occuring, use the attributes parameter
+    # to print the change.
+    def change_to_s(currentvalue, newvalue)
+      state = @resource[:attributes].inspect
+      name  = @resource[:resource].to_s
+      "transition state #{state} applied to #{name}"
+    end
+
+    def is_to_s(currentvalue)
+      "n/a"
+    end
+
+    def should_to_s(shouldvalue)
+      state = @resource[:attributes].inspect
+      name  = @resource[:resource].to_s
+      "transition #{name} to state #{state}"
+    end
+
     # Whether or not the resource is insync is determined by the transition?()
     # method of the provider. To transition or not to transition, that is the
     # question.
