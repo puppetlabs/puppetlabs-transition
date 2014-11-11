@@ -27,11 +27,23 @@ Puppet::Type.type(:transition).provide(:ruby) do
       v.nil? || [:before, :subscribe, :require, :notify].include?(k)
     end
 
-    # Build and apply the resource ?????
-    resource = Puppet::Resource.new(type, name, :parameters => merged)
-    result = Puppet::Resource.indirection.save(resource, resource_key)
+    # Build and apply the resource. There is probably a better way of doing
+    # this.
+    rsrc = Puppet::Resource.new(type, name, :parameters => merged)
+    result = Puppet::Resource.indirection.save(rsrc, resource_key)
 
-    # TODO: Sanely log the result. ???
+    # TODO: Find a better way to log the results ???
+
+    failed = result[1].resource_statuses[rsrc.to_s].events.any? do |event|
+      event.status == "failure"
+    end
+
+    if failed
+      events = result[1].resource_statuses[rsrc.to_s].events.map do |event|
+        "#{event.property}: #{event.message}"
+      end.join('; ')
+      fail(events)
+    end
   end
 
   def transition?

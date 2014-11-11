@@ -37,7 +37,7 @@ Puppet::Type.newtype(:transition) do
     end
 
     def is_to_s(currentvalue)
-      "n/a"
+      "enabled"
     end
 
     def should_to_s(shouldvalue)
