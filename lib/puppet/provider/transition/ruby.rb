@@ -24,7 +24,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
     # Type being copied, and we just want to build a new type from a
     # Resource.
     merged = catalog_attributes.merge(transition_attributes).reject do |k,v|
-      v.nil?
+      v.nil? || [:before, :subscribe, :require, :notify].include?(k)
     end
 
     # Build and apply the resource ?????
