@@ -103,4 +103,19 @@ Puppet::Type.newtype(:transition) do
     end
   end
 
+  # This type needs to implement an "autobefore" kind of behavior. Currently
+  # the Puppet type system only supports autorequire, so we achieve autobefore
+  # by hijacking autorequire.
+  def autorequire(rel_catalog = nil)
+    reqs = super
+
+    [ @parameters[:prior_to].value,
+      @parameters[:resource].value
+    ].flatten.each do |rel|
+      reqs << Puppet::Relationship::new(self, catalog.resource(rel.to_s))
+    end
+
+    reqs
+  end
+
 end
