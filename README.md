@@ -125,7 +125,7 @@ following the transition.
 
 ## Limitations
 
-### The resource paramter must refer to a native type
+### The resource parameter must refer to a native type
 
 The `resource` parameter may only refer to a native type, it cannot refer to a
 defined type. This is because the transition provider operates on the catalog,
