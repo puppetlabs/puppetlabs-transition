@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "source": "https://github.com/puppetlabs/puppetlabs-transition",
   "project_page": "https://github.com/puppetlabs/puppetlabs-transition",
-  "issues_url": "https://github.com/puppetlabs/puppetlabs-transition/issues",
+  "issues_url": "https://tickets.puppetlabs.com/browse/MODULES",
   "tags": [
     "catalog",
     "transition"
