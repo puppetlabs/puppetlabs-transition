@@ -65,7 +65,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
       end
     end
 
-    # If changes are pending, transtion?() will return true.
+    # If changes are pending, transition?() will return true.
     pending_change
   end
 
