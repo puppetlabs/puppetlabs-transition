@@ -2,7 +2,7 @@
   "name": "puppetlabs-transition",
   "version": "0.1.0",
   "author": "Puppet Labs",
-  "summary": "Transition state resource type",
+  "summary": “Provides a Puppet type and provider for describing conditional transition states.”,
   "license": "Apache-2.0",
   "source": "https://github.com/puppetlabs/puppetlabs-transition",
   "project_page": "https://github.com/puppetlabs/puppetlabs-transition",
