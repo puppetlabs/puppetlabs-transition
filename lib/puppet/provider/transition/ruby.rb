@@ -5,7 +5,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
     specific."
 
   def transition
-    catalog_resource = resolve_resource(@resource['resource'])
+    catalog_resource = @resource[:resource]
     name = catalog_resource.name
     type = catalog_resource.type
     resource_key = [type, name].join('/')
@@ -14,7 +14,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
     catalog_attributes = catalog_resource.to_hash
 
     # Symbolize keys in attributes parameter
-    transition_attributes = @resource['attributes'].inject({}) do |new,(k,v)|
+    transition_attributes = @resource[:attributes].inject({}) do |new,(k,v)|
       new[k.to_sym] = v
       new
     end
@@ -47,10 +47,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
   end
 
   def transition?
-    # Retrieve each prior_to resource from the catalog.
-    priors = [@resource['prior_to']].flatten.map do |item|
-      resolve_resource(item)
-    end
+    priors = @resource[:prior_to]
 
     # Determine if there are changes pending to any of the prior_to resources.
     pending_change = priors.any? do |resource|
@@ -68,28 +65,4 @@ Puppet::Type.type(:transition).provide(:ruby) do
     # If changes are pending, transition?() will return true.
     pending_change
   end
-
-  # This method borrowed from the richardc/datacat module
-  def resolve_resource(reference)
-    if reference.is_a?(Puppet::Type)
-      # Probably from a unit test, use the resource as-is
-      return reference
-    end
-
-    if reference.is_a?(Puppet::Resource)
-      # Already part resolved - puppet apply?
-      # join it to the catalog where we live and ask it to resolve
-      reference.catalog = resource.catalog
-      return reference.resolve
-    end
-
-    if reference.is_a?(String)
-      # 3.3.0 catalogs you need to resolve like so
-      return resource.catalog.resource(reference)
-    end
-
-    # If we got here, panic
-    raise "Don't know how to convert '#{reference.inspect}' of class #{reference.class} into a resource"
-  end
-
 end
