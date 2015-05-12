@@ -2,7 +2,7 @@
   "name": "puppetlabs-transition",
   "version": "0.1.0",
   "author": "Puppet Labs",
-  "summary": “Provides a Puppet type and provider for describing conditional transition states.”,
+  "summary": "Provides a Puppet type and provider for describing conditional transition states.",
   "license": "Apache-2.0",
   "source": "https://github.com/puppetlabs/puppetlabs-transition",
   "project_page": "https://github.com/puppetlabs/puppetlabs-transition",
@@ -17,7 +17,15 @@
       "version_requirement": "3.x"
     }
   ],
-  "dependencies": [
-  
+  "dependencies": [ ],
+  "operatingsystem_support": [
+    { "operatingsystem": "RedHat"  },
+    { "operatingsystem": "Windows" },
+    { "operatingsystem": "Debian"  },
+    { "operatingsystem": "Ubuntu"  },
+    { "operatingsystem": "OS X"    },
+    { "operatingsystem": "Solaris" },
+    { "operatingsystem": "SLES"    },
+    { "operatingsystem": "AIX"     }
   ]
 }
