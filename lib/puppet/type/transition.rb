@@ -65,19 +65,6 @@ Puppet::Type.newtype(:transition) do
     desc "The resource for which a transitional state is being defined. This
       should be a resource reference (e.g. Service['apache']). This resource
       will be made to autorequire the transitional state."
-
-    validate do |value|
-      # TODO: implement validation checking that the value is either a valid
-      # resource reference, or a string that can be converted to a valid
-      # resource reference.
-      true
-    end
-
-    munge do |value|
-      # TODO: if the value is not already a valid resource reference, convert
-      # it into one.
-      value
-    end
   end
 
   newparam(:attributes) do
@@ -86,8 +73,7 @@ Puppet::Type.newtype(:transition) do
       resource being transitioned."
 
     validate do |value|
-      # TODO: validate that this is a hash.
-      true
+      raise ArgumentError, "#{value} is not a hash" unless value.is_a? Hash
     end
   end
 
@@ -97,12 +83,12 @@ Puppet::Type.newtype(:transition) do
       will be applied. These resources will each be made to autorequire the
       transitional state."
 
-    validate do |value|
-      # TODO: validate that each element is a valid resource reference.
-      true
+    munge do |values|
+      values = [values] unless values.is_a? Array
+      values
     end
   end
- 
+
   # This resource does not need or use a namevar. However, it is far simpler to
   # define an unused name parameter and make it the namevar than it is to
   # convince Puppet that a namevar isn't needed.
@@ -136,4 +122,59 @@ Puppet::Type.newtype(:transition) do
     reqs
   end
 
+  def pre_run_check
+    # Validate and munge `resource`
+    resource = parameter(:resource)
+    begin
+      resource.value = retrieve_resource_reference(resource.value)
+    rescue ArgumentError => err
+      self.fail "Parameter resource failed: #{err} at #{@file}:#{@line}"
+    end
+
+    # Validate and munge `prior_to`
+    prior_to = parameter(:prior_to)
+    prior_to.value.map! do |res|
+      begin
+        retrieve_resource_reference(res)
+      rescue ArgumentError => err
+        self.fail "Parameter prior_to failed: #{err} at #{@file}:#{@line}"
+      end
+    end
+
+    # Validate `attributes`
+    attributes = parameter(:attributes).value
+    res = Puppet::Resource.new(resource.value.to_s)
+    attributes.keys.each do |attribute|
+      next if res.valid_parameter?(attribute)
+      self.fail 'Parameter attributes failed: ' \
+        "#{attribute} is not a valid parameter for type #{res.type} " \
+        "at #{@file}:#{@line}"
+    end
+  end
+
+  # Retrieves a resourcereference from the catalog.
+  #
+  # @raise [ArgumentError] if the object is not a valid resource
+  #   reference or does not exist in the catalog.
+  # @return [void]
+  def retrieve_resource_reference(res)
+    case res
+    when Puppet::Type
+    when Puppet::Resource
+    when String
+      begin
+        Puppet::Resource.new(res)
+      rescue ArgumentError
+        raise ArgumentError, "#{res} is not a valid resource reference"
+      end
+    else
+      raise ArgumentError, "#{res} is not a valid resource reference"
+    end
+
+    resource = catalog.resource(res.to_s)
+
+    raise ArgumentError, "#{res} is not in the catalog" unless resource
+
+    resource
+  end
 end
