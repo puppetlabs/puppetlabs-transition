@@ -32,6 +32,17 @@ Puppet::Type.type(:transition).provide(:ruby) do
     rsrc = Puppet::Resource.new(type, name, :parameters => merged)
     result = Puppet::Resource.indirection.save(rsrc, resource_key)
 
+    # Re-fresh state if the provider supports prefetch.
+    unless catalog_resource.provider.nil?
+      provider_class = catalog_resource.provider.class
+      if provider_class.respond_to?(:prefetch)
+        # Clear property hash as prefetch might not update resources that
+        # have transitioned to :absent.
+        catalog_resource.provider.instance_variable_set(:@property_hash, {})
+        provider_class.prefetch({ catalog_resource.name => catalog_resource})
+      end
+    end
+
     # TODO: Find a better way to log the results ???
 
     failed = result[1].resource_statuses[rsrc.to_s].events.any? do |event|
