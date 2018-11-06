@@ -63,6 +63,15 @@ Puppet::Type.type(:transition).provide(:ruby) do
     # Determine if there are changes pending to any of the prior_to resources.
     pending_change = priors.any? do |resource|
       current_values = resource.retrieve_resource.to_hash
+
+      # if should be absent and is absent, the other properties don't matter
+      # (and may trigger false positives).
+      current_ensure = current_values[:ensure]
+      prop_ensure = resource.property(:ensure)
+      if prop_ensure.should == :absent && prop_ensure.safe_insync?(current_ensure)
+        next false
+      end
+      
       resource.properties.any? do |property|
         current_value = current_values[property.name]
         if property.should && !property.safe_insync?(current_value)
