@@ -14,7 +14,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
     catalog_attributes = catalog_resource.to_hash
 
     # Symbolize keys in attributes parameter
-    transition_attributes = @resource[:attributes].inject({}) do |new,(k,v)|
+    transition_attributes = @resource[:attributes].reduce({}) do |new, (k, v)|
       new[k.to_sym] = v
       new
     end
@@ -23,13 +23,13 @@ Puppet::Type.type(:transition).provide(:ruby) do
     # with an explicit nil value. Those attributes appear to come from the
     # Type being copied, and we just want to build a new type from a
     # Resource.
-    merged = catalog_attributes.merge(transition_attributes).reject do |k,v|
+    merged = catalog_attributes.merge(transition_attributes).reject do |k, v|
       v.nil? || [:before, :subscribe, :require, :notify].include?(k)
     end
 
     # Build and apply the resource. There is probably a better way of doing
     # this.
-    rsrc = Puppet::Resource.new(type, name, :parameters => merged)
+    rsrc = Puppet::Resource.new(type, name, parameters: merged)
     result = Puppet::Resource.indirection.save(rsrc, resource_key)
 
     # Re-fresh state if the provider supports prefetch.
@@ -39,21 +39,21 @@ Puppet::Type.type(:transition).provide(:ruby) do
         # Clear property hash as prefetch might not update resources that
         # have transitioned to :absent.
         catalog_resource.provider.instance_variable_set(:@property_hash, {})
-        provider_class.prefetch({ catalog_resource.name => catalog_resource})
+        provider_class.prefetch(catalog_resource.name => catalog_resource)
       end
     end
 
     # TODO: Find a better way to log the results ???
 
     failed = result[1].resource_statuses[rsrc.to_s].events.any? do |event|
-      event.status == "failure"
+      event.status == 'failure'
     end
 
     if failed
       events = result[1].resource_statuses[rsrc.to_s].events.map do |event|
         "#{event.property}: #{event.message}"
-      end.join('; ')
-      fail(events)
+      end
+      raise Puppet::Error, events.join('; ')
     end
   end
 
@@ -71,7 +71,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
       if prop_ensure.should == :absent && prop_ensure.safe_insync?(current_ensure)
         next false
       end
-      
+
       resource.properties.any? do |property|
         current_value = current_values[property.name]
         if property.should && !property.safe_insync?(current_value)
