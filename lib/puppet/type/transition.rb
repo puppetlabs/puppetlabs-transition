@@ -1,5 +1,5 @@
 Puppet::Type.newtype(:transition) do
-  @doc = "Define a transitional state."
+  @doc = 'Define a transitional state.'
 
   # The enable property determines whether or not this transition state may be
   # applied. When enable=true, the property will call two methods in the
@@ -25,22 +25,22 @@ Puppet::Type.newtype(:transition) do
     # transition conditions exist. Therefore retrieve should just echo the
     # property value.
     def retrieve
-      @resource["enable"]
+      @resource['enable']
     end
 
     # When displaying that a change is occuring, use the attributes parameter
     # to print the change.
-    def change_to_s(currentvalue, newvalue)
+    def change_to_s(_currentvalue, _newvalue)
       state = @resource[:attributes].inspect
       name  = @resource[:resource].to_s
       "transition state #{state} applied to #{name}"
     end
 
-    def is_to_s(currentvalue)
-      "enabled"
+    def is_to_s(_currentvalue) # rubocop:disable Style/PredicateName
+      'enabled'
     end
 
-    def should_to_s(shouldvalue)
+    def should_to_s(_shouldvalue)
       state = @resource[:attributes].inspect
       name  = @resource[:resource].to_s
       "transition #{name} to state #{state}"
@@ -49,8 +49,8 @@ Puppet::Type.newtype(:transition) do
     # Whether or not the resource is insync is determined by the transition?()
     # method of the provider. To transition or not to transition, that is the
     # question.
-    def insync?(is)
-      case @resource["enable"]
+    def insync?(_is)
+      case @resource['enable']
       when :true
         # If a transition should occur, the resource is not insync.
         !@resource.provider.transition?
@@ -77,7 +77,7 @@ Puppet::Type.newtype(:transition) do
     end
   end
 
-  newparam(:prior_to, :array_matching => :all) do
+  newparam(:prior_to, array_matching: :all) do
     desc "An array of resources to check for synchronization. If any of these
       resources are out of sync (change pending), then this transitional state
       will be applied. These resources will each be made to autorequire the
@@ -101,8 +101,8 @@ Puppet::Type.newtype(:transition) do
   # All parameters are required (except for name)
   validate do
     [:resource, :attributes, :prior_to].each do |param|
-      if not self.parameters[param]
-        self.fail "Required parameter missing: #{param}"
+      unless self.parameters[param]
+        raise Puppet::Error, "Required parameter missing: #{param}"
       end
     end
   end
@@ -113,10 +113,11 @@ Puppet::Type.newtype(:transition) do
   def autorequire(rel_catalog = nil)
     reqs = super
 
-    [ @parameters[:prior_to].value,
-      @parameters[:resource].value
+    [
+      @parameters[:prior_to].value,
+      @parameters[:resource].value,
     ].flatten.each do |rel|
-      reqs << Puppet::Relationship::new(self, catalog.resource(rel.to_s))
+      reqs << Puppet::Relationship.new(self, catalog.resource(rel.to_s))
     end
 
     reqs
@@ -128,7 +129,7 @@ Puppet::Type.newtype(:transition) do
     begin
       resource.value = retrieve_resource_reference(resource.value)
     rescue ArgumentError => err
-      self.fail "Parameter resource failed: #{err} at #{@file}:#{@line}"
+      raise Puppet::Error, "Parameter resource failed: #{err} at #{@file}:#{@line}"
     end
 
     # Validate and munge `prior_to`
@@ -137,7 +138,7 @@ Puppet::Type.newtype(:transition) do
       begin
         retrieve_resource_reference(res)
       rescue ArgumentError => err
-        self.fail "Parameter prior_to failed: #{err} at #{@file}:#{@line}"
+        raise Puppet::Error, "Parameter prior_to failed: #{err} at #{@file}:#{@line}"
       end
     end
 
@@ -146,7 +147,7 @@ Puppet::Type.newtype(:transition) do
     res = Puppet::Resource.new(resource.value.to_s)
     attributes.keys.each do |attribute|
       next if res.valid_parameter?(attribute)
-      self.fail 'Parameter attributes failed: ' \
+      raise Puppet::Error, 'Parameter attributes failed: ' \
         "#{attribute} is not a valid parameter for type #{res.type} " \
         "at #{@file}:#{@line}"
     end
@@ -159,8 +160,8 @@ Puppet::Type.newtype(:transition) do
   # @return [void]
   def retrieve_resource_reference(res)
     case res
-    when Puppet::Type
-    when Puppet::Resource
+    when Puppet::Type      # rubocop:disable Lint/EmptyWhen
+    when Puppet::Resource  # rubocop:disable Lint/EmptyWhen
     when String
       begin
         Puppet::Resource.new(res)

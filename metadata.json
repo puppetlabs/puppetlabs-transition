@@ -7,9 +7,34 @@
   "source": "https://github.com/puppetlabs/puppetlabs-transition",
   "project_page": "https://github.com/puppetlabs/puppetlabs-transition",
   "issues_url": "https://tickets.puppetlabs.com/browse/MODULES",
-  "tags": [
-    "catalog",
-    "transition"
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat"
+    },
+    {
+      "operatingsystem": "Windows"
+    },
+    {
+      "operatingsystem": "Debian"
+    },
+    {
+      "operatingsystem": "Ubuntu"
+    },
+    {
+      "operatingsystem": "OS X"
+    },
+    {
+      "operatingsystem": "Solaris"
+    },
+    {
+      "operatingsystem": "SLES"
+    },
+    {
+      "operatingsystem": "AIX"
+    }
   ],
   "requirements": [
     {
@@ -17,15 +42,11 @@
       "version_requirement": ">= 3.0.0 < 7.0.0"
     }
   ],
-  "dependencies": [ ],
-  "operatingsystem_support": [
-    { "operatingsystem": "RedHat"  },
-    { "operatingsystem": "Windows" },
-    { "operatingsystem": "Debian"  },
-    { "operatingsystem": "Ubuntu"  },
-    { "operatingsystem": "OS X"    },
-    { "operatingsystem": "Solaris" },
-    { "operatingsystem": "SLES"    },
-    { "operatingsystem": "AIX"     }
-  ]
+  "tags": [
+    "catalog",
+    "transition"
+  ],
+  "pdk-version": "1.15.0",
+  "template-url": "pdk-default#1.15.0",
+  "template-ref": "tags/1.15.0-0-g0bc522e"
 }
