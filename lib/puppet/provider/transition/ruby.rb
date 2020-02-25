@@ -68,7 +68,7 @@ Puppet::Type.type(:transition).provide(:ruby) do
       # (and may trigger false positives).
       current_ensure = current_values[:ensure]
       prop_ensure = resource.property(:ensure)
-      if prop_ensure.should == :absent && prop_ensure.safe_insync?(current_ensure)
+      if prop_ensure && prop_ensure.should == :absent && prop_ensure.safe_insync?(current_ensure)
         next false
       end
 

@@ -1,2 +1,0 @@
-lib/puppet/type/transition.rb 11561c6f938fe5bf281ebcb1931844dcc4c6a00c
-lib/puppet/provider/transition/ruby.rb f5c371cfd4164e8bddefd543f51d547ee856b6c7
