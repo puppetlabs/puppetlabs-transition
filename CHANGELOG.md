@@ -1,11 +1,23 @@
 # Changelog
 
-## [0.1.2](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.2) (2020-02-24)
+## [0.1.3](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.3) (2020-02-25)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.2...0.1.3)
+
+**Merged pull requests:**
+
+- Correct an error with \#10 [\#15](https://github.com/puppetlabs/puppetlabs-transition/pull/15) ([binford2k](https://github.com/binford2k))
+- \(maint\) Convert to PDK [\#14](https://github.com/puppetlabs/puppetlabs-transition/pull/14) ([binford2k](https://github.com/binford2k))
+
+## [0.1.2](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.2) (2020-02-25)
+
+### Note: this version was not released due to an error in the pipeline. Apologies for any confusion.
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.1...0.1.2)
 
 **Merged pull requests:**
 
+- \(MODULES-10567 \) Release 0.1.2 [\#12](https://github.com/puppetlabs/puppetlabs-transition/pull/12) ([binford2k](https://github.com/binford2k))
 - Mark compatible with Puppet 4, 5 and 6 [\#11](https://github.com/puppetlabs/puppetlabs-transition/pull/11) ([ekohl](https://github.com/ekohl))
 - Fix spurious trigger with ensure =\> absent while other properties are set [\#10](https://github.com/puppetlabs/puppetlabs-transition/pull/10) ([philomory](https://github.com/philomory))
 
