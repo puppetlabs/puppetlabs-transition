@@ -14,9 +14,8 @@ Puppet::Type.type(:transition).provide(:ruby) do
     catalog_attributes = catalog_resource.to_hash
 
     # Symbolize keys in attributes parameter
-    transition_attributes = @resource[:attributes].reduce({}) do |new, (k, v)|
+    transition_attributes = @resource[:attributes].each_with_object({}) do |(k, v), new|
       new[k.to_sym] = v
-      new
     end
 
     # Create a transitional, merged set of attributes, sans any attributes
