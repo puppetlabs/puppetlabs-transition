@@ -101,7 +101,7 @@ Puppet::Type.newtype(:transition) do
   # All parameters are required (except for name)
   validate do
     [:resource, :attributes, :prior_to].each do |param|
-      unless self.parameters[param]
+      unless parameters[param]
         raise Puppet::Error, "Required parameter missing: #{param}"
       end
     end
@@ -145,7 +145,7 @@ Puppet::Type.newtype(:transition) do
     # Validate `attributes`
     attributes = parameter(:attributes).value
     res = Puppet::Resource.new(resource.value.to_s)
-    attributes.keys.each do |attribute|
+    attributes.each_key do |attribute|
       next if res.valid_parameter?(attribute)
       raise Puppet::Error, 'Parameter attributes failed: ' \
         "#{attribute} is not a valid parameter for type #{res.type} " \
