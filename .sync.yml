@@ -1,0 +1,7 @@
+---
+common:
+
+.rubocop.yml:
+  default_configs:
+    "Style/GuardClause":
+       Enabled: False
