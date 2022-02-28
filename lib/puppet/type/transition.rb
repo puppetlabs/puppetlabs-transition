@@ -135,11 +135,9 @@ Puppet::Type.newtype(:transition) do
     # Validate and munge `prior_to`
     prior_to = parameter(:prior_to)
     prior_to.value.map! do |res|
-      begin
-        retrieve_resource_reference(res)
-      rescue ArgumentError => err
-        raise Puppet::Error, "Parameter prior_to failed: #{err} at #{@file}:#{@line}"
-      end
+      retrieve_resource_reference(res)
+    rescue ArgumentError => err
+      raise Puppet::Error, "Parameter prior_to failed: #{err} at #{@file}:#{@line}"
     end
 
     # Validate `attributes`
