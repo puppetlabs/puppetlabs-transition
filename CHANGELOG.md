@@ -1,48 +1,55 @@
-# Changelog
+# Change log
+
+All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
+
+## [v1.0.0](https://github.com/puppetlabs/puppetlabs-transition/tree/v1.0.0) (2022-02-28)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.3...v1.0.0)
+
+### Changed
+
+- \(SUP-2799\) Update to Supportable OS and Puppet Versions [\#23](https://github.com/puppetlabs/puppetlabs-transition/pull/23) ([MartyEwings](https://github.com/MartyEwings))
+
+### Added
+
+- \(SUP-2798\) \(MODULES-11208\) PDK Update and Puppet 7 Inclusion [\#18](https://github.com/puppetlabs/puppetlabs-transition/pull/18) ([MartyEwings](https://github.com/MartyEwings))
 
 ## [0.1.3](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.3) (2020-02-25)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.2...0.1.3)
 
-**Merged pull requests:**
+### Added
 
 - Correct an error with \#10 [\#15](https://github.com/puppetlabs/puppetlabs-transition/pull/15) ([binford2k](https://github.com/binford2k))
-- \(maint\) Convert to PDK [\#14](https://github.com/puppetlabs/puppetlabs-transition/pull/14) ([binford2k](https://github.com/binford2k))
 
 ## [0.1.2](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.2) (2020-02-25)
 
-### Note: this version was not released due to an error in the pipeline. Apologies for any confusion.
-
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.1...0.1.2)
 
-**Merged pull requests:**
+### Fixed
 
-- \(MODULES-10567 \) Release 0.1.2 [\#12](https://github.com/puppetlabs/puppetlabs-transition/pull/12) ([binford2k](https://github.com/binford2k))
-- Mark compatible with Puppet 4, 5 and 6 [\#11](https://github.com/puppetlabs/puppetlabs-transition/pull/11) ([ekohl](https://github.com/ekohl))
-- Fix spurious trigger with ensure =\> absent while other properties are set [\#10](https://github.com/puppetlabs/puppetlabs-transition/pull/10) ([philomory](https://github.com/philomory))
+- \(MODULES-8215\) Fix spurious trigger with ensure =\> absent while other properties are set [\#10](https://github.com/puppetlabs/puppetlabs-transition/pull/10) ([philomory](https://github.com/philomory))
 
 ## [0.1.1](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.1) (2017-04-13)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.0...0.1.1)
 
-**Merged pull requests:**
+### Added
 
-- \(MODULES-4734\) release 0.1.1 prep [\#9](https://github.com/puppetlabs/puppetlabs-transition/pull/9) ([eputnam](https://github.com/eputnam))
-- Clear cached provider properties after transition [\#8](https://github.com/puppetlabs/puppetlabs-transition/pull/8) ([Sharpie](https://github.com/Sharpie))
-- Add os support information to metadata.json [\#7](https://github.com/puppetlabs/puppetlabs-transition/pull/7) ([reidmv](https://github.com/reidmv))
-- Don't use smart quotes [\#6](https://github.com/puppetlabs/puppetlabs-transition/pull/6) ([elyscape](https://github.com/elyscape))
 - Add validation to transition type [\#5](https://github.com/puppetlabs/puppetlabs-transition/pull/5) ([elyscape](https://github.com/elyscape))
 - fix a very minor typo [\#4](https://github.com/puppetlabs/puppetlabs-transition/pull/4) ([awaxa](https://github.com/awaxa))
-- Add metadata summary per FM-1523 [\#3](https://github.com/puppetlabs/puppetlabs-transition/pull/3) ([laurenrother](https://github.com/laurenrother))
+
+### Fixed
+
+- Clear cached provider properties after transition [\#8](https://github.com/puppetlabs/puppetlabs-transition/pull/8) ([Sharpie](https://github.com/Sharpie))
 
 ## [0.1.0](https://github.com/puppetlabs/puppetlabs-transition/tree/0.1.0) (2014-11-18)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/1d08a765232c701d0bc5ec124f12998300af30dc...0.1.0)
 
-**Merged pull requests:**
+### Fixed
 
 - Fix issues URL [\#2](https://github.com/puppetlabs/puppetlabs-transition/pull/2) ([underscorgan](https://github.com/underscorgan))
-- Prep for 0.1.0 release [\#1](https://github.com/puppetlabs/puppetlabs-transition/pull/1) ([underscorgan](https://github.com/underscorgan))
 
 
 
