@@ -5,6 +5,11 @@ fixtures:
   forge_modules:
 #     stdlib: "puppetlabs/stdlib"
   repositories:
-    facts: 'https://github.com/puppetlabs/puppetlabs-facts.git'
-    puppet_agent: 'https://github.com/puppetlabs/puppetlabs-puppet_agent.git'
-    provision: 'https://github.com/puppetlabs/provision.git'
+    facts: 'https://github.com/puppetlabs/puppetlabs-facts'
+    puppet_agent: 'https://github.com/puppetlabs/puppetlabs-puppet_agent'
+    provision: 'https://github.com/puppetlabs/provision'
+    bootstrap: 'https://github.com/puppetlabs/puppetlabs-bootstrap'
+    puppet_conf: 'https://github.com/puppetlabs/puppetlabs-puppet_conf'
+    ruby_task_helper: 'https://git@github.com/puppetlabs/puppetlabs-ruby_task_helper'
+    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
+    deploy_pe: 'https://github.com/jarretlavallee/puppet-deploy_pe'

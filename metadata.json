@@ -10,36 +10,96 @@
   "dependencies": [
 
   ],
-  "operatingsystem_support": [
+    "operatingsystem_support": [
     {
-      "operatingsystem": "RedHat"
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7",
+        "8"
+      ]
     },
     {
-      "operatingsystem": "Windows"
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
     },
     {
-      "operatingsystem": "Debian"
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
     },
     {
-      "operatingsystem": "Ubuntu"
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
     },
     {
-      "operatingsystem": "OS X"
+      "operatingsystem": "SLES",
+      "operatingsystemrelease": [
+        "12",
+        "15"
+      ]
     },
     {
-      "operatingsystem": "Solaris"
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "10",
+        "11"
+      ]
     },
     {
-      "operatingsystem": "SLES"
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "18.04",
+        "20.04"
+      ]
     },
     {
-      "operatingsystem": "AIX"
+      "operatingsystem": "Solaris",
+      "operatingsystemrelease": [
+        "10",
+        "11"
+      ]
+    },
+    {
+      "operatingsystem": "Windows",
+      "operatingsystemrelease": [
+        "2012",
+        "2012 R2",
+        "2016",
+        "2019",
+        "7",
+        "8.1",
+        "10"
+      ]
+    },
+    {
+      "operatingsystem": "AIX",
+      "operatingsystemrelease": [
+        "7.1",
+        "7.2"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "AlmaLinux",
+      "operatingsystemrelease": [
+        "8"
+      ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.0.0 < 8.0.0"
+      "version_requirement": ">= 6.0.0 < 8.0.0"
     }
   ],
   "tags": [
