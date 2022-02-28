@@ -47,7 +47,12 @@
     "transition"
   ],
   "pdk-version": "2.3.0",
+<<<<<<< HEAD
   "template-url": "https://github.com/puppetlabs/pdk-templates#main",
   "template-ref": "heads/main-0-g0544f64"
+=======
+  "template-url": "pdk-default#2.3.0",
+  "template-ref": "tags/2.3.0-0-g8aaceff"
+>>>>>>> 7c27c4fb324100313ff0163968dda6124dd1608f
 }
 
