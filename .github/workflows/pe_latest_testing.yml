@@ -51,7 +51,7 @@ jobs:
         echo STEP_ID=Setup-Acceptance-Test-Matrix >> $GITHUB_ENV
         echo STEP_START=$(date +%s) >> $GITHUB_ENV
 
-    # Store the result of the curl call in $forge_response
+    # store the result of the curl call in $forge_response
     - name: Curl Forge for PE versions
       id: curl_forge
       run: |
