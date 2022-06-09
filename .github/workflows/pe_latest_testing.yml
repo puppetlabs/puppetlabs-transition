@@ -2,7 +2,7 @@ name: "PE Latest Acceptance Testing"
 
 on:
   workflow_dispatch:
-  pull_request:
+  workflow_call:
 
 env:
   HONEYCOMB_WRITEKEY: 7f3c63a70eecc61d635917de46bea4e6
