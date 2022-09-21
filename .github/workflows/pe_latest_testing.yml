@@ -60,7 +60,7 @@ jobs:
     - name: Set latest release
       id: latest_release
       run: |
-        out=$(jq -c '[.[] | select(.lts == false)][0].latest | {"collection": [.]}' <<<'${{ steps.curl_forge.outputs.forge_response }}')
+        out=$(jq -c '[.[] | select(.release == "2019.8.x")][0].latest | {"collection": [.]}' <<<'${{ steps.curl_forge.outputs.forge_response }}')
         echo "::set-output name=latest::$out"
 
     - name: Setup Acceptance Test Matrix
