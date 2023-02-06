@@ -36,7 +36,7 @@ jobs:
     - name: "PDK Release prep"
       uses: docker://puppet/puppet-dev-tools:4.x
       with:
-        args: 'pdk release prep --force'
+        args: 'pdk release prep --force --debug'
       env:
         CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
