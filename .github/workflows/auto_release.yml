@@ -34,9 +34,9 @@ jobs:
         persist-credentials: false
 
     - name: "PDK Release prep"
-      uses: docker://puppet/pdk:latest
+      uses: docker://puppet/puppet-dev-tools:4.x
       with:
-        args: 'release prep --force'
+        args: 'pdk release prep --force'
       env:
         CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
