@@ -34,22 +34,22 @@ jobs:
     - name: Curl Forge for PE versions
       id: curl_forge
       run: |
-        echo "::set-output name=forge_response::$(curl https://forge.puppet.com/private/versions/pe)"
+        echo "forge_response=$(curl https://forge.puppet.com/private/versions/pe)" >> $GITHUB_OUTPUT
 
     - name: Set latest release
       id: latest_release
       run: |
         out=$(jq -c '[.[] | select(.lts == true)][0].latest | {"collection": [.]}' <<<'${{ steps.curl_forge.outputs.forge_response }}')
-        echo "::set-output name=latest::$out"
+        echo "latest=$out" >> $GITHUB_OUTPUT
 
     - name: Setup Acceptance Test Matrix
       id: get-matrix
       run: |
         if [[ -e spec/fixtures/matrix/lts.json ]]; then
           out=$(jq -c '. + ($matrix | .[])' --slurpfile matrix spec/fixtures/matrix/lts.json <<<'${{ steps.latest_release.outputs.latest }}')
-          echo "::set-output name=matrix::$out"
+          echo "matrix=$out" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=matris::{}"
+          echo "matrix={}" >> $GITHUB_OUTPUT
         fi
 
 

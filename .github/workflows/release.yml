@@ -17,7 +17,7 @@ jobs:
       - name: Get Version
         id: gv
         run: |
-          echo "::set-output name=ver::$(jq --raw-output .version metadata.json)"
+          echo "ver=$(jq --raw-output .version metadata.json)" >> $GITHUB_OUTPUT
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release
