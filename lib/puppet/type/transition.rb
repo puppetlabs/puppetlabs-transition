@@ -36,7 +36,7 @@ Puppet::Type.newtype(:transition) do
       "transition state #{state} applied to #{name}"
     end
 
-    def is_to_s(_currentvalue) # rubocop:disable Style/PredicateName
+    def is_to_s(_currentvalue) # rubocop:disable Naming/PredicateName
       'enabled'
     end
 
@@ -158,8 +158,8 @@ Puppet::Type.newtype(:transition) do
   # @return [void]
   def retrieve_resource_reference(res)
     case res
-    when Puppet::Type      # rubocop:disable Lint/EmptyWhen
-    when Puppet::Resource  # rubocop:disable Lint/EmptyWhen
+    when Puppet::Type
+    when Puppet::Resource
     when String
       begin
         Puppet::Resource.new(res)
