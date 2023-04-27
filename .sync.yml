@@ -34,6 +34,8 @@ spec/default_facts.yml:
   default_configs:
     "Style/GuardClause":
        Enabled: False
+    "Lint/EmptyWhen":
+       Enabled: False
 Gemfile:
   optional:
     ":development":

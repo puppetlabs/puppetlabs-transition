@@ -4,6 +4,9 @@
 fixtures:
   forge_modules:
 #     stdlib: "puppetlabs/stdlib"
+    service: "puppetlabs/service"
+    package: "puppetlabs/package"
+    reboot: "puppetlabs/reboot"
   repositories:
     facts: 'https://github.com/puppetlabs/puppetlabs-facts'
     puppet_agent: 'https://github.com/puppetlabs/puppetlabs-puppet_agent'
@@ -13,3 +16,12 @@ fixtures:
     ruby_task_helper: 'https://git@github.com/puppetlabs/puppetlabs-ruby_task_helper'
     stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
     deploy_pe: 'https://github.com/jarretlavallee/puppet-deploy_pe'
+    node_manager: 'https://github.com/WhatsARanjit/puppet-node_manager'
+    apply_helpers: 'https://github.com/puppetlabs/puppetlabs-apply_helpers'
+    bolt_shim: 'https://github.com/puppetlabs/puppetlabs-bolt_shim'
+    debug: 'https://github.com/nwops/puppet-debug'
+    format: 'https://github.com/voxpupuli/puppet-format'
+    container_inventory: 'https://gitlab.com/nwops/bolt-container_inventory'
+    peadm: 'https://github.com/puppetlabs/puppetlabs-peadm.git'
+  symlinks:
+    peadm_spec: "#{source_dir}/spec/fixtures/modules/peadm/spec/acceptance/peadm_spec/"

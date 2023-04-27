@@ -5,9 +5,9 @@ transition { 'run twice':
 }
 
 notify { 'message':
-  message => 'This content should display after'
+  message => 'This content should display after',
 }
 
 notify { 'ending':
-  message => 'The end'
+  message => 'The end',
 }
