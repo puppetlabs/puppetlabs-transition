@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   workflow_call:
   schedule:
-    - cron:  '25 5 * * *'
+    - cron:  '25 5 * * 3'
 
 jobs:
   setup_matrix:
