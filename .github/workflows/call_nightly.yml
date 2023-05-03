@@ -1,0 +1,17 @@
+name: Call main PR testing workflows
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '25 5 * * 3'
+
+jobs:
+  spec_testing:
+    name: "Spec testing"
+    uses: ./.github/workflows/spec.yml
+
+  nightly_testing:
+    name: "PE Nightly Testing"
+    needs: spec_testing
+    if: github.repository != 'puppetlabs/puppetlabs-bash_task_helper' || github.repository != 'puppetlabs/puppetlabs-puppet_operations_appliance'
+    uses: ./.github/workflows/pe_nightly_testing.yml

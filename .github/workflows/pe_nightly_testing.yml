@@ -3,8 +3,6 @@ name: "PE Nightly Acceptance Testing"
 on:
   workflow_dispatch:
   workflow_call:
-  schedule:
-    - cron:  '25 5 * * 3'
 
 jobs:
   setup_matrix:
@@ -49,9 +47,6 @@ jobs:
             os: sles-15-x86_64
           - image: rhel-8
             os: el-8-x86_64
-
-    env:
-      PUPPET_GEM_VERSION: '~> 7.24'
 
     steps:
     - name: Checkout Source
