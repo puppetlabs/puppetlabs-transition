@@ -15,3 +15,4 @@ jobs:
     name: "PE Nightly Testing"
     needs: spec_testing
     uses: ./.github/workflows/pe_nightly_testing.yml
+    secrets: inherit
