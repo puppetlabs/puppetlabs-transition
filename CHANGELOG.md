@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.0.0](https://github.com/puppetlabs/puppetlabs-transition/tree/v2.0.0) (2023-06-02)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/v1.0.0...v2.0.0)
+
+### Changed
+
+- \(SUP-4197\) Puppet 8 release prep [\#25](https://github.com/puppetlabs/puppetlabs-transition/pull/25) ([elainemccloskey](https://github.com/elainemccloskey))
+
 ## [v1.0.0](https://github.com/puppetlabs/puppetlabs-transition/tree/v1.0.0) (2022-02-28)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-transition/compare/0.1.3...v1.0.0)

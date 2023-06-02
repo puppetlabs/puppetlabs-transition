@@ -20,7 +20,7 @@ The following properties are available in the `transition` type.
 
 ##### `enable`
 
-Valid values: ``true``, ``false``
+Valid values: `true`, `false`
 
 Enable or disable this conditional state transition. Valid values
 are true or false.
@@ -31,38 +31,38 @@ Default value: `true`
 
 The following parameters are available in the `transition` type.
 
-* [`attributes`](#attributes)
-* [`name`](#name)
-* [`prior_to`](#prior_to)
-* [`provider`](#provider)
-* [`resource`](#resource)
+* [`attributes`](#-transition--attributes)
+* [`name`](#-transition--name)
+* [`prior_to`](#-transition--prior_to)
+* [`provider`](#-transition--provider)
+* [`resource`](#-transition--resource)
 
-##### <a name="attributes"></a>`attributes`
+##### <a name="-transition--attributes"></a>`attributes`
 
 The hash of attributes to set on the resource when applying a
 transitional state. Each hash key must be a valid attribute for the
 resource being transitioned.
 
-##### <a name="name"></a>`name`
+##### <a name="-transition--name"></a>`name`
 
 namevar
 
 This parameter does not serve any function beyond setting the
 resource's name.
 
-##### <a name="prior_to"></a>`prior_to`
+##### <a name="-transition--prior_to"></a>`prior_to`
 
 An array of resources to check for synchronization. If any of these
 resources are out of sync (change pending), then this transitional state
 will be applied. These resources will each be made to autorequire the
 transitional state.
 
-##### <a name="provider"></a>`provider`
+##### <a name="-transition--provider"></a>`provider`
 
 The specific backend to use for this `transition` resource. You will seldom need to specify this --- Puppet will usually
 discover the appropriate provider for your platform.
 
-##### <a name="resource"></a>`resource`
+##### <a name="-transition--resource"></a>`resource`
 
 The resource for which a transitional state is being defined. This
 should be a resource reference (e.g. Service['apache']). This resource
