@@ -18,12 +18,15 @@ jobs:
         id: gv
         run: |
           echo "ver=$(jq --raw-output .version metadata.json)" >> $GITHUB_OUTPUT
-      - name: Create release
-        run: |
-          gh release create v${{ steps.gv.outputs.ver }} --title v${{ steps.gv.outputs.ver }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+        with:
+          tag_name: "v${{ steps.gv.outputs.ver }}"
+          draft: false
+          prerelease: false
 
   deploy-forge:
     name: Deploy to Forge
