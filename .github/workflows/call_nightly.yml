@@ -2,8 +2,6 @@ name: Call nightly testing workflows
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '25 5 * * 3'
 
 jobs:
   spec_testing:
