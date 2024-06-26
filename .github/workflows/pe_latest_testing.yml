@@ -99,7 +99,7 @@ jobs:
         echo INVENTORY_PATH=$FILE >> $GITHUB_ENV
     - name: Install PE
       run: |
-        bundle exec bolt --tmpdir /tmp --log-level debug  --modulepath spec/fixtures/modules  -i ./$INVENTORY_PATH plan run deploy_pe::provision_master --params '{"version":"${{ matrix.collection }}","pe_settings":{"password":"puppetlabs", "configure_tuning": false}}'  --targets all --stream
+        bundle exec bolt --tmpdir /tmp --log-level debug  --modulepath spec/fixtures/modules  -i ./$INVENTORY_PATH plan run deploy_pe::provision_master --params '{"version":"${{ matrix.collection }}","pe_settings":{"password":"Puppetlabs1!", "configure_tuning": false}}'  --targets all --stream
 
     - name: Install module
       run: |
