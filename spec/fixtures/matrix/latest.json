@@ -8,12 +8,7 @@
     {
         "label": "Ubuntu-2404",
         "provider": "provision::provision_service",
-        "image": "ubuntu-2404-lts"
-    },
-    {
-        "label": "Ubuntu-2004",
-        "provider": "provision::provision_service",
-        "image": "ubuntu-2004-lts"
+        "image": "ubuntu-2404-lts-amd64"
     },
     {
         "label": "Ubuntu-2204",

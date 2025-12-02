@@ -11,14 +11,9 @@
         "image": "ubuntu-2204-lts"
     },
     {
-        "label": "Ubuntu-2004",
-        "provider": "provision::provision_service",
-        "image": "ubuntu-2004-lts"
-    },
-    {
         "label": "Ubuntu-2404",
         "provider": "provision::provision_service",
-        "image": "ubuntu-2404-lts"
+        "image": "ubuntu-2404-lts-amd64"
     },
     {
         "label": "RedHat-8",
