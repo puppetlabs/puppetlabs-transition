@@ -17,7 +17,7 @@ jobs:
     steps:
 
       - name: Checkout Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: ${{ github.repository_owner == 'puppetlabs' }}
 
       - name: Activate Ruby 3.2
@@ -62,7 +62,7 @@ jobs:
           echo "SANITIZED_PUPPET_VERSION=$(echo '${{ matrix.puppet_version }}' | sed 's/~> //g')" >> $GITHUB_ENV
 
       - name: Checkout Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Activate Ruby ${{ matrix.ruby_version }}"
         uses: ruby/setup-ruby@v1
@@ -87,7 +87,7 @@ jobs:
     name: Shellcheck
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Run ShellCheck
       uses: ludeeus/action-shellcheck@master
 

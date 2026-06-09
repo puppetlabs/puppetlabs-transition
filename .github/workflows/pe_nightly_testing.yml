@@ -11,14 +11,14 @@ jobs:
 
     steps:
     - name: Checkout Source
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       if: ${{ github.repository_owner == 'puppetlabs' }}
 
-    - name: Activate Ruby 2.7
+    - name: Activate Ruby 3.2
       uses: ruby/setup-ruby@v1
       if: ${{ github.repository_owner == 'puppetlabs' }}
       with:
-        ruby-version: "2.7"
+        ruby-version: "3.2"
         bundler-cache: true
 
     - name: Print bundle environment
@@ -35,27 +35,21 @@ jobs:
       fail-fast: false
       matrix:
         architecture: [standard]
-        image: [centos-7, sles-12, sles-15, rhel-7, rhel-8]
+        image: [rhel-8, rhel-9]
         include:
-          - image: centos-7
-            os: el-7-x86_64
-          - image: sles-12
-            os: sles-12-x86_64
-          - image: rhel-7
-            os: el-7-x86_64
-          - image: sles-15
-            os: sles-15-x86_64
           - image: rhel-8
             os: el-8-x86_64
+          - image: rhel-9
+            os: el-9-x86_64
 
     steps:
     - name: Checkout Source
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Activate Ruby 2.7
+    - name: Activate Ruby 3.2
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "2.7"
+        ruby-version: "3.2"
         bundler-cache: true
     - name: Print bundle environment
       run: |
